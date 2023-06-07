@@ -1,2 +1,3 @@
 #!/bin/bash
-/alx-system_engineering-devops/0x00-shell_basics#
+current_dir=$(pwd -p)
+echo /alx-system_engineering-devops/0x00-shell_basics#
