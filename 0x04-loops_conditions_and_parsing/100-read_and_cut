@@ -4,7 +4,7 @@
 #    username
 #    user id
 #    Home directory path for the user
-while read line
-do
-    echo "$line" | cut -d':' -f1,3,6
-done </etc/passwd
+exec 3< /etc/passwd
+while read -ru 3; do
+	echo "$REPLY" | cut -d':' -f1,3,6
+done
