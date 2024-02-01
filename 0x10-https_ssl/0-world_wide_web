@@ -1,16 +1,15 @@
 #!/usr/bin/env bash
 # fetches domain and subdomain
 
-check_domain() {
-    # Check for a valid domain
-    SUBDOMAINS=("www"  "lb-01" "web-01" "web-02")
-    if [ -z "$2" ]; then
-	for i in "${SUBDOMAINS[@]}"; do
-	    dig "$i.$1" | grep -A1 'ANSWER SECTION:' | tail -n1 | awk '{split($0, SUBDOMAIN, "."); print "The subdomain " SUBDOMAIN[1] " is a " $4 " record and points to " $5}'
-	done
-    else
-	dig "$2.$1" | grep -A1 'ANSWER SECTION:' | tail -n1 | awk '{split($0, SUBDOMAIN, "."); print "The subdomain " SUBDOMAIN[1] " is a " $4 " record and points to " $5}'
-    fi
+dig_info ()
+{
+    dig "$2.$1" | awk '/ANSWER SECTION:/{getline; printf "The subdomain %s is a %s record and points to %s\n", var, $4, $5}' var="$2"
 }
 
-check_domain "$1" "$2"
+for subdomain in "www" "lb-01" "web-01" "web-02"
+do
+    if [ -z "$2" ] || [ "$2" == "$subdomain" ] ;
+    then
+	dig_info "$1" "$subdomain"
+    fi
+done
