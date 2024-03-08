@@ -7,7 +7,7 @@ returns the number of subscribers
 
 import requests
 
-BASE_URL = 'http://reddit.com/r/{}/about.json'
+BASE_URL = 'https://reddit.com/r/{}/about.json'
 
 
 def number_of_subscribers(subreddit):
