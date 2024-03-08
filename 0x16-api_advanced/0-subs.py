@@ -5,25 +5,16 @@
 """
 
 
-from json import loads
-from requests import get
+import requests
+
+BASE_URL = 'http://reddit.com/r/{}/about.json'
 
 
 def number_of_subscribers(subreddit):
-    """
-query Reddit API and returns a list
-    """
-    url = 'https://www.reddit.com/r/{}/about.json'.format(subreddit)
-    headers = {
-        'User-Agent':
-        'Mozilla/5.0 (Windows; U; Windows NT 5.1; de; rv:1.9.2.3) \
-        Gecko/20100401 Firefox/3.6.3 (FM Scene 4.6.1)'
-    }
-    response = get(url, headers=headers)
-    reddits = response.json()
-
-    try:
-        subscribers = reddits.get('data').get('subscribers')
-        return int(subscribers)
-    except:
+    '''Gets number of reddit subscribers'''
+    headers = {'User-agent': 'Unix:0-subs:v1'}
+    response = requests.get(BASE_URL.format(subreddit),
+                            headers=headers)
+    if response.status_code != 200:
         return 0
+    return response.json().get('data', {}).get('subscribers', 0)
