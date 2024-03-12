@@ -1,19 +1,23 @@
 Postmortem
 When the project System Engineering & DevOps project 0x19 was availed, an outage happened when I had no idea how to commence.
+
 In Summary
 A wrong file name caused the issue in code and needed a rectification. The correct file name, located in the wp-content directory of the application folder, was class-wp-locale.php.
+
 The issue
 Optimize cache eviction policies: Assess and refine cache eviction policies by analyzing usage patterns and expected fluctuations in traffic.
 Scale cache infrastructure: Evaluate the existing cache infrastructure and determine whether additional resources or distributed caching solutions are necessary to manage peak loads effectively.
 Enhance monitoring and alerts: Deploy comprehensive monitoring across the entire web stack, monitoring cache usage, response times, and database performance to quickly detect any abnormalities.
 Load testing and capacity planning: Conduct regular load testing to simulate various traffic scenarios and verify that the system can handle increased loads without compromising performance.
 Improve incident response process: Streamline the escalation process and clearly define roles and responsibilities for incident response to ensure smooth collaboration among teams during critical situations.
+
 Resolution
 Revise cache eviction policies: Modify the cache eviction strategies to favor frequently accessed data, accounting for memory limitations.
 Assess cache infrastructure: Evaluate the current cache infrastructure's capabilities and investigate options for scaling or integrating distributed caching solutions.
 Deploy thorough monitoring: Implement a monitoring system encompassing cache utilization, response times, and database performance, accompanied by relevant alert mechanisms.
 Execute load testing: Create and run load testing scenarios to verify the system's performance across different traffic scenarios.
 Refine incident response protocols: Review and enhance the incident response procedures to facilitate prompt detection, investigation, and resolution of forthcoming incidents.
+
 Prevention
 This outage was an application error. The underlisted are preventive measures to avert such situations in future:
 i.	Proper testing of application
